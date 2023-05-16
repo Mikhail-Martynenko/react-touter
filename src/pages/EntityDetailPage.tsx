@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from "react-router-dom";
 
 const EntityDetailPage = () => {
-    const {id} = useParams()
+    const {id} = useParams<{ id: string }>()
     return (
         <div>
             <h2>Детальная страница сущности {id}</h2>

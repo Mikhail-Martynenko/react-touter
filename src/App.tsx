@@ -29,7 +29,9 @@ const App = () => {
     return (
         <div className="App">
             <Navigation />
-            <button onClick={() => setAuth(!isAuth)}>Получить права суперпользователя</button>
+            <button
+                onClick={() => setAuth(!isAuth)}>{isAuth ? 'Отказаться от прав суперпользователя' : 'Получить права суперпользователя'}
+            </button>
             <Routes>
                 <Route path="/" element={<h2>Главная страница</h2>} />
                 <Route path="/entities" element={<EntityListPage />} />

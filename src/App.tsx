@@ -1,46 +1,17 @@
 import React, {useState} from 'react';
-import {Routes, Route, NavLink, Navigate} from 'react-router-dom';
-import EntityDetailPage from "./pages/EntityDetailPage";
-import EntityListPage from "./pages/EntityListPage";
-import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css"
-import AuthenticatedPage from "./pages/AuthenticatedPage";
-
-
-const Navigation = () => {
-    return (
-        <nav className="nav">
-            <ul>
-                <li>
-                    <NavLink to="/" end>Главная</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/entities">Список сущностей</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/ggwp">Только для авторизованных</NavLink>
-                </li>
-            </ul>
-        </nav>
-    );
-};
+import Navigation from "./router/Navigation";
+import AllRouters from "./router/AllRouters";
+export const MainPage = () => <h1>main</h1>
 const App = () => {
     const [isAuth, setAuth] = useState<boolean>(false);
+
     return (
         <div className="App">
             <Navigation />
-            <button
-                onClick={() => setAuth(!isAuth)}>{isAuth ? 'Отказаться от прав суперпользователя' : 'Получить права суперпользователя'}
-            </button>
-            <Routes>
-                <Route path="/" element={<h2>Главная страница</h2>} />
-                <Route path="/entities" element={<EntityListPage />} />
-                <Route path="/entities/:id" element={<EntityDetailPage />} />
-                <Route path='/ggwp' element={isAuth ? <AuthenticatedPage /> : <Navigate to={'/'} />} />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <button onClick={() => setAuth(!isAuth)}>{isAuth ? 'Отказаться от прав суперпользователя' : 'Получить права суперпользователя'}</button>
+            <AllRouters isAuth={isAuth}/>
         </div>
     );
 };
-
 export default App;
